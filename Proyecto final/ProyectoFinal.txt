@@ -1,0 +1,85 @@
+#La clase Tarea tiene un constructor (__init__) que toma un parámetro llamado descripcion.
+Dentro del constructor, se inicializan dos atributos de clase:descripcion y completada 
+
+class Tarea:
+    def __init__(self, descripcion):
+#Almacena la descripcion de la tarea.
+        self.descripcion = descripcion 
+# Un valor booleano que indica si la tarea está completada (inicialmente se establece como False)
+        self.completada = False 
+class ListaTareas:
+#La clase ListaTareas también tiene un constructor (__init__) que inicializa un atributo llamado tareas como una lista vacía.
+    def __init__(self):
+        self.tareas = []
+
+    def agregar_tarea(self, descripcion):
+# Crea una nueva instancia de Tarea(metodo) con la descripción proporcionada y la agrega a la lista de tareas.
+        nueva_tarea = Tarea(descripcion)
+#
+        self.tareas.append(nueva_tarea)
+        print(f"Tarea '{descripcion}' agregada.")
+
+    def marcar_completada(self, posicion):
+# Marca una tarea específica como completada (cambia el atributo completada a True).
+        try:
+            tarea = self.tareas[posicion]
+            tarea.completada = True
+            print(f"Tarea '{tarea.descripcion}' marcada como completada.")
+        except IndexError:
+            print("La posición especificada no existe en la lista.")
+
+    def mostrar_tareas(self):
+#Muestra todas las tareas en la lista junto con su estado (pendiente o completada).
+        for i, tarea in enumerate(self.tareas):
+            estado = "Completada" if tarea.completada else "Pendiente"
+            print(f"{i + 1}. {tarea.descripcion} ({estado})")
+
+    def eliminar_tarea(self, posicion):
+# Elimina una tarea de la lista según la posición especificada.
+        try:
+            tarea_eliminada = self.tareas.pop(posicion)
+            print(f"Tarea '{tarea_eliminada.descripcion}' eliminada.")
+        except IndexError:
+            print("La posición especificada no existe en la lista.")
+
+if __name__ == "__main__":
+# Este bucle while true, permite al usuario interactuar con las opciones de gestión de tareas (agregar, marcar, mostrar y eliminar) hasta que elija salir
+    lista = ListaTareas()
+
+    while True:
+        print("\n--- Gestión de Tareas ---")
+        print("1. Agregar tarea")
+        print("2. Marcar tarea como completada")
+        print("3. Mostrar todas las tareas")
+        print("4. Eliminar tarea")
+        print("5. Salir")
+
+        opcion = input("Elige una opción: ")
+# Introducir datos por teclado del usuario y hacemos una condición por cada opción marcada.
+        if opcion == "1":
+            descripcion = input("Introduce la descripción de la tarea: ")
+            lista.agregar_tarea(descripcion)
+        elif opcion == "2":
+            posicion = int(input("Introduce la posición de la tarea a marcar como completada: "))
+            lista.marcar_completada(posicion - 1)
+        elif opcion == "3":
+            lista.mostrar_tareas()
+        elif opcion == "4":
+            posicion = int(input("Introduce la posición de la tarea a eliminar: "))
+            lista.eliminar_tarea(posicion - 1)
+        elif opcion == "5":
+            print("¡Hasta luego!")
+            break
+        else:
+            print("Opción no válida. Inténtalo de nuevo.")
+
+
+
+
+
+
+
+
+
+ 
+
